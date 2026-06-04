@@ -1,0 +1,16 @@
+{
+  "name": "justwatch-nuvio-addon",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Private cached JustWatch NL trending catalogs for Nuvio/Stremio",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "refresh": "node scripts/scrape-jw.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3"
+  }
+}

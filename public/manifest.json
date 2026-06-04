@@ -1,0 +1,21 @@
+{
+  "id": "custom.justwatch.charts",
+  "version": "0.1.0",
+  "name": "JustWatch Charts US",
+  "description": "Private cached JustWatch US trending catalogs for Nuvio/Stremio",
+  "resources": ["catalog"],
+  "types": ["movie", "series"],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "justwatch.us.trending_30_day.movies",
+      "name": "JustWatch US Trending Movies"
+    },
+    {
+      "type": "series",
+      "id": "justwatch.us.trending_30_day.series",
+      "name": "JustWatch US Trending Series"
+    }
+  ],
+  "idPrefixes": ["tt"]
+}

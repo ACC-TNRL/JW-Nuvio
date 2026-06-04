@@ -1,0 +1,54 @@
+name: Daily Refresh JustWatch NL
+
+on:
+  schedule:
+    # Elke dag om 06:00 UTC (08:00 NL tijd)
+    - cron: "0 6 * * *"
+  workflow_dispatch: # Handmatig triggeren
+  push:
+    paths:
+      - "scripts/scrape-jw.js" # Herdraaien als scraper verandert
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Scrape JustWatch & update cache
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          JUSTWATCH_COUNTRY: ${{ vars.JUSTWATCH_COUNTRY || 'US' }}
+          JUSTWATCH_LANGUAGE: ${{ vars.JUSTWATCH_LANGUAGE || 'en' }}
+          CATALOG_LIMIT: ${{ vars.CATALOG_LIMIT || '50' }}
+          ERDB_TOKEN: ${{ secrets.ERDB_TOKEN || '' }}
+          ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
+        run: npm run refresh
+
+      - name: Copy cache to public/ (for GitHub Pages)
+        run: |
+          mkdir -p public/catalog/movie public/catalog/series
+          cp cache/justwatch.us.trending_30_day.movies.json public/catalog/movie/justwatch.us.trending_30_day.movies.json
+          cp cache/justwatch.us.trending_30_day.series.json public/catalog/series/justwatch.us.trending_30_day.series.json
+
+      - name: Commit & push cache + public
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add cache/*.json public/
+          if git diff --staged --quiet; then
+            echo "No changes to cache"
+          else
+            git commit -m "chore: daily JustWatch NL cache refresh [skip ci]"
+            git push
+          fi
