@@ -36,17 +36,16 @@ jobs:
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
         run: npm run refresh
 
-      - name: Copy cache to public/ (for GitHub Pages)
+      - name: Copy cache to repo root (for GitHub Pages)
         run: |
-          mkdir -p public/catalog/movie public/catalog/series
-          cp cache/justwatch.us.trending_30_day.movies.json public/catalog/movie/justwatch.us.trending_30_day.movies.json
-          cp cache/justwatch.us.trending_30_day.series.json public/catalog/series/justwatch.us.trending_30_day.series.json
+          cp cache/justwatch.us.trending_30_day.movies.json catalog/movie/justwatch.us.trending_30_day.movies.json
+          cp cache/justwatch.us.trending_30_day.series.json catalog/series/justwatch.us.trending_30_day.series.json
 
-      - name: Commit & push cache + public
+      - name: Commit & push cache
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cache/*.json public/
+          git add cache/*.json manifest.json catalog/
           if git diff --staged --quiet; then
             echo "No changes to cache"
           else
