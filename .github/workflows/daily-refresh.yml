@@ -27,7 +27,6 @@ jobs:
 
       - name: Scrape JustWatch & update cache
         env:
-          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
           JUSTWATCH_COUNTRY: ${{ vars.JUSTWATCH_COUNTRY || 'US' }}
           JUSTWATCH_LANGUAGE: ${{ vars.JUSTWATCH_LANGUAGE || 'en' }}
           CATALOG_LIMIT: ${{ vars.CATALOG_LIMIT || '50' }}
