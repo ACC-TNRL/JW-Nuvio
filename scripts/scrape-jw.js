@@ -153,8 +153,6 @@ function writeCache(filename, metas) {
 
 function writeManifests(countryCode, catalogs) {
   const countryLower = countryCode.toLowerCase();
-  const manifestsDir = path.join(__dirname, "..", "manifests");
-  fs.mkdirSync(manifestsDir, { recursive: true });
 
   // Helper: build a manifest object
   function buildManifest(id, name, description, cats) {
@@ -193,7 +191,7 @@ function writeManifests(countryCode, catalogs) {
     `JustWatch ${countryCode} monthly trending`,
     monthlyCats
   );
-  fs.writeFileSync(path.join(manifestsDir, `${countryLower}-monthly.json`), JSON.stringify(monthly, null, 2) + "\n", "utf-8");
+  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}-monthly.json`), JSON.stringify(monthly, null, 2) + "\n", "utf-8");
 
   // 3. Weekly-only manifest
   const weekly = buildManifest(
@@ -202,9 +200,9 @@ function writeManifests(countryCode, catalogs) {
     `JustWatch ${countryCode} weekly trending`,
     weeklyCats
   );
-  fs.writeFileSync(path.join(manifestsDir, `${countryLower}-weekly.json`), JSON.stringify(weekly, null, 2) + "\n", "utf-8");
+  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}-weekly.json`), JSON.stringify(weekly, null, 2) + "\n", "utf-8");
 
-  console.log(`  📄 manifest-${countryLower}.json + manifests/${countryLower}-monthly.json + manifests/${countryLower}-weekly.json`);
+  console.log(`  📄 manifest-${countryLower}.json + manifest-${countryLower}-monthly.json + manifest-${countryLower}-weekly.json`);
 }
 
 async function main() {
