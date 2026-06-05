@@ -207,7 +207,7 @@
 
 <script>
   function copyUrl(btn, path) {
-    const url = location.origin + location.pathname.replace(/\/?$/, '/') + path;
+    const url = location.origin + location.pathname.replace(/[^/]*$/, '') + path;
     navigator.clipboard.writeText(url).then(() => {
       btn.classList.add('copied');
       btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
