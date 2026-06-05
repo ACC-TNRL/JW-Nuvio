@@ -29,8 +29,8 @@ jobs:
 
       - name: Scrape JustWatch & update cache
         env:
-          JUSTWATCH_COUNTRY: ${{ vars.JUSTWATCH_COUNTRY || 'US' }}
-          JUSTWATCH_LANGUAGE: ${{ vars.JUSTWATCH_LANGUAGE || 'en' }}
+          JUSTWATCH_COUNTRY: ${{ vars.JUSTWATCH_COUNTRY || 'NL' }}
+          JUSTWATCH_LANGUAGE: ${{ vars.JUSTWATCH_LANGUAGE || 'nl' }}
           CATALOG_LIMIT: ${{ vars.CATALOG_LIMIT || '50' }}
           ERDB_TOKEN: ${{ secrets.ERDB_TOKEN || '' }}
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
@@ -38,10 +38,9 @@ jobs:
 
       - name: Copy cache to repo root (for GitHub Pages)
         run: |
-          cp cache/justwatch.us.trending_30_day.movies.json catalog/movie/justwatch.us.trending_30_day.movies.json
-          cp cache/justwatch.us.trending_30_day.series.json catalog/series/justwatch.us.trending_30_day.series.json
-          cp cache/justwatch.us.trending_7_day.movies.json catalog/movie/justwatch.us.trending_7_day.movies.json
-          cp cache/justwatch.us.trending_7_day.series.json catalog/series/justwatch.us.trending_7_day.series.json
+          mkdir -p catalog/movie catalog/series
+          cp cache/*.movies.json catalog/movie/
+          cp cache/*.series.json catalog/series/
 
       - name: Commit & push cache
         run: |

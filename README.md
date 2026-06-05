@@ -1,6 +1,8 @@
 # JustWatch Nuvio Addon
 
-Private/experimental Stremio-compatible catalog addon die JustWatch US trending data (monthly & weekly) als dynamische collecties aanbiedt voor gebruik in [Nuvio](https://nuvio.tv/).
+Private/experimental Stremio-compatible catalog addon die JustWatch trending data (monthly & weekly) als dynamische collecties aanbiedt voor gebruik in [Nuvio](https://nuvio.tv/).
+
+Standaard land: **US**. Stel `JUSTWATCH_COUNTRY=NL` in voor Nederlandse rankings.
 
 ## Hoe het werkt
 
@@ -38,24 +40,25 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
 ## Endpoints
 
 - `GET /manifest.json` — Stremio manifest
-- `GET /catalog/movie/justwatch.us.trending_30_day.movies.json` — Movies catalog (Monthly)
-- `GET /catalog/movie/justwatch.us.trending_7_day.movies.json` — Movies catalog (Weekly)
-- `GET /catalog/series/justwatch.us.trending_30_day.series.json` — Series catalog (Monthly)
-- `GET /catalog/series/justwatch.us.trending_7_day.series.json` — Series catalog (Weekly)
+- `GET /catalog/movie/justwatch.{country}.trending_30_day.movies.json` — Movies (Monthly)
+- `GET /catalog/movie/justwatch.{country}.trending_7_day.movies.json` — Movies (Weekly)
+- `GET /catalog/series/justwatch.{country}.trending_30_day.series.json` — Series (Monthly)
+- `GET /catalog/series/justwatch.{country}.trending_7_day.series.json` — Series (Weekly)
 - `POST /admin/refresh` — Refresh cache (vereist `x-admin-key` header)
 - `GET /health` — Health check
 
 ## Nuvio source configuratie
+
+Vervang `{country}` door `us`, `nl`, etc.
 
 **Movies (Monthly):**
 
 ```json
 {
   "type": "movie",
-  "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.us.trending_30_day.movies"
+  "catalogId": "justwatch.{country}.trending_30_day.movies"
 }
 ```
 
@@ -64,10 +67,9 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
 ```json
 {
   "type": "movie",
-  "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.us.trending_7_day.movies"
+  "catalogId": "justwatch.{country}.trending_7_day.movies"
 }
 ```
 
@@ -76,10 +78,9 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
 ```json
 {
   "type": "series",
-  "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.us.trending_30_day.series"
+  "catalogId": "justwatch.{country}.trending_30_day.series"
 }
 ```
 
@@ -88,10 +89,9 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
 ```json
 {
   "type": "series",
-  "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.us.trending_7_day.series"
+  "catalogId": "justwatch.{country}.trending_7_day.series"
 }
 ```
 

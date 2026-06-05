@@ -19,18 +19,21 @@ const CACHE_DIR = path.join(__dirname, "cache");
 
 // ── Catalog definitions ──────────────────────────────────────────────────────
 
+const COUNTRY = (process.env.JUSTWATCH_COUNTRY || "US").toUpperCase();
+const COUNTRY_LOWER = COUNTRY.toLowerCase();
+
 const CATALOGS = [
-  { type: "movie", id: "justwatch.us.trending_30_day.movies", name: "JustWatch US Trending Movies Monthly" },
-  { type: "series", id: "justwatch.us.trending_30_day.series", name: "JustWatch US Trending Series Monthly" },
-  { type: "movie", id: "justwatch.us.trending_7_day.movies", name: "JustWatch US Trending Movies Weekly" },
-  { type: "series", id: "justwatch.us.trending_7_day.series", name: "JustWatch US Trending Series Weekly" },
+  { type: "movie", id: `justwatch.${COUNTRY_LOWER}.trending_30_day.movies`, name: `JustWatch ${COUNTRY} Trending Movies Monthly` },
+  { type: "series", id: `justwatch.${COUNTRY_LOWER}.trending_30_day.series`, name: `JustWatch ${COUNTRY} Trending Series Monthly` },
+  { type: "movie", id: `justwatch.${COUNTRY_LOWER}.trending_7_day.movies`, name: `JustWatch ${COUNTRY} Trending Movies Weekly` },
+  { type: "series", id: `justwatch.${COUNTRY_LOWER}.trending_7_day.series`, name: `JustWatch ${COUNTRY} Trending Series Weekly` },
 ];
 
 const MANIFEST = {
   id: "custom.justwatch.charts",
   version: "0.1.0",
-  name: "JustWatch Charts US",
-  description: "Private cached JustWatch US trending catalogs for Nuvio/Stremio",
+  name: `JustWatch Charts ${COUNTRY}`,
+  description: `Private cached JustWatch ${COUNTRY} trending catalogs for Nuvio/Stremio`,
   resources: ["catalog"],
   types: ["movie", "series"],
   catalogs: CATALOGS.map((c) => ({ type: c.type, id: c.id, name: c.name })),

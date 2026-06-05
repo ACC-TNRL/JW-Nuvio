@@ -151,16 +151,37 @@ function writeCache(filename, metas) {
   console.log(`  ✅ ${metas.length} items → ${filename}`);
 }
 
+function writeManifest(countryCode, catalogs) {
+  const manifest = {
+    id: "custom.justwatch.charts",
+    version: "0.1.0",
+    name: `JustWatch Charts ${countryCode}`,
+    description: `Private cached JustWatch ${countryCode} trending catalogs for Nuvio/Stremio`,
+    resources: ["catalog"],
+    types: ["movie", "series"],
+    catalogs: catalogs.map((c) => ({
+      type: c.type === "MOVIE" ? "movie" : "series",
+      id: c.file.replace(".json", ""),
+      name: `JustWatch ${countryCode} Trending ${c.type === "MOVIE" ? "Movies" : "Series"} ${c.label}`,
+    })),
+    idPrefixes: ["tt"],
+  };
+  const manifestPath = path.join(__dirname, "..", "manifest.json");
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+  console.log(`  📄 manifest.json updated for ${countryCode}`);
+}
+
 async function main() {
   const label = COUNTRY === "GLOBAL" ? "US (global)" : COUNTRY;
   console.log(`🔄 JustWatch Streaming Charts — ${label}`);
   console.log(`   Same data source as ERDB ranking badges\n`);
 
+  const countryLower = COUNTRY.toLowerCase();
   const catalogs = [
-    { type: "MOVIE", file: "justwatch.us.trending_30_day.movies.json", category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
-    { type: "SHOW", file: "justwatch.us.trending_30_day.series.json", category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
-    { type: "MOVIE", file: "justwatch.us.trending_7_day.movies.json", category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
-    { type: "SHOW", file: "justwatch.us.trending_7_day.series.json", category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
+    { type: "MOVIE", file: `justwatch.${countryLower}.trending_30_day.movies.json`, category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
+    { type: "SHOW", file: `justwatch.${countryLower}.trending_30_day.series.json`, category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
+    { type: "MOVIE", file: `justwatch.${countryLower}.trending_7_day.movies.json`, category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
+    { type: "SHOW", file: `justwatch.${countryLower}.trending_7_day.series.json`, category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
   ];
 
   for (const catalog of catalogs) {
@@ -182,6 +203,8 @@ async function main() {
   const movieWeekly = readCacheCount(catalogs[2].file);
   const seriesWeekly = readCacheCount(catalogs[3].file);
   console.log(`\n✨ Done! Monthly — Movies: ${movieMonthly}, Series: ${seriesMonthly} | Weekly — Movies: ${movieWeekly}, Series: ${seriesWeekly}`);
+
+  writeManifest(COUNTRY, catalogs);
 }
 
 main().catch((err) => {
