@@ -20,10 +20,10 @@ const CACHE_DIR = path.join(__dirname, "cache");
 // ── Catalog definitions ──────────────────────────────────────────────────────
 
 const CATALOGS = [
-  { type: "movie", id: "justwatch.us.trending_30_day.movies", name: "JustWatch US Trending Movies" },
-  { type: "series", id: "justwatch.us.trending_30_day.series", name: "JustWatch US Trending Series" },
-  { type: "movie", id: "justwatch.us.trending_7_day.movies", name: "JustWatch US Trending Movies (Weekly)" },
-  { type: "series", id: "justwatch.us.trending_7_day.series", name: "JustWatch US Trending Series (Weekly)" },
+  { type: "movie", id: "justwatch.us.trending_30_day.movies", name: "JustWatch US Trending Movies Monthly" },
+  { type: "series", id: "justwatch.us.trending_30_day.series", name: "JustWatch US Trending Series Monthly" },
+  { type: "movie", id: "justwatch.us.trending_7_day.movies", name: "JustWatch US Trending Movies Weekly" },
+  { type: "series", id: "justwatch.us.trending_7_day.series", name: "JustWatch US Trending Series Weekly" },
 ];
 
 const MANIFEST = {

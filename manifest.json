@@ -9,22 +9,22 @@
     {
       "type": "movie",
       "id": "justwatch.us.trending_30_day.movies",
-      "name": "JustWatch US Trending Movies"
+      "name": "JustWatch US Trending Movies Monthly"
     },
     {
       "type": "movie",
       "id": "justwatch.us.trending_7_day.movies",
-      "name": "JustWatch US Trending Movies (Weekly)"
+      "name": "JustWatch US Trending Movies Weekly"
     },
     {
       "type": "series",
       "id": "justwatch.us.trending_30_day.series",
-      "name": "JustWatch US Trending Series"
+      "name": "JustWatch US Trending Series Monthly"
     },
     {
       "type": "series",
       "id": "justwatch.us.trending_7_day.series",
-      "name": "JustWatch US Trending Series (Weekly)"
+      "name": "JustWatch US Trending Series Weekly"
     }
   ],
   "idPrefixes": ["tt"]
