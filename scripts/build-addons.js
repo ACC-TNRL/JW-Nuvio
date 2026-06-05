@@ -32,11 +32,13 @@ function cacheExists(id) {
 // Write one addon: manifest.json + catalog/{movie,series}/<id>.json into subdir.
 // Pass subdir = "" to publish at repository root.
 function writeAddon(subdir, manifest) {
-  // Ensure every catalog has skip:true so they only appear in
-  // Discover/Collections, not duplicated on the Stremio/Nuvio home screen.
+  // Give every catalog a required "genre" extra.  Stremio/Nuvio skips
+  // catalogs with required extras on the home screen (they need user input)
+  // but still shows them in Discover/Collections.
   for (const cat of manifest.catalogs) {
-    cat.extra = { skip: true };
+    cat.extra = [{ name: "genre", isRequired: true, options: ["All"] }];
   }
+
   const dir = subdir ? path.join(ROOT, subdir) : ROOT;
   fs.mkdirSync(path.join(dir, "catalog", "movie"), { recursive: true });
   fs.mkdirSync(path.join(dir, "catalog", "series"), { recursive: true });
@@ -48,9 +50,17 @@ function writeAddon(subdir, manifest) {
   for (const cat of manifest.catalogs) {
     const src = path.join(CACHE_DIR, `${cat.id}.json`);
     const dest = path.join(dir, "catalog", cat.type, `${cat.id}.json`);
-    if (fs.existsSync(src)) fs.copyFileSync(src, dest);
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, dest);
+
+      // Also generate the extra-resolved path that Stremio/Nuvio will
+      // request once the user picks "All" in Discover.
+      const extraDest = path.join(dir, "catalog", cat.type, cat.id, "genre=All.json");
+      fs.mkdirSync(path.dirname(extraDest), { recursive: true });
+      fs.copyFileSync(src, extraDest);
+    }
   }
-  console.log(`  📁 ${subdir || "(root)"}/ → manifest.json + ${manifest.catalogs.length} catalog(s)`);
+  console.log(`  📁 ${subdir || "(root)"}/ → manifest.json + ${manifest.catalogs.length} catalog(s) + extra-resolved paths`);
 }
 
 function jwCatalog(country, period, type) {

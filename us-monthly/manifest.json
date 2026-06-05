@@ -15,17 +15,29 @@
       "type": "movie",
       "id": "justwatch.us.trending_30_day.movies",
       "name": "JustWatch US Trending Movies Monthly",
-      "extra": {
-        "skip": true
-      }
+      "extra": [
+        {
+          "name": "genre",
+          "isRequired": true,
+          "options": [
+            "All"
+          ]
+        }
+      ]
     },
     {
       "type": "series",
       "id": "justwatch.us.trending_30_day.series",
       "name": "JustWatch US Trending Series Monthly",
-      "extra": {
-        "skip": true
-      }
+      "extra": [
+        {
+          "name": "genre",
+          "isRequired": true,
+          "options": [
+            "All"
+          ]
+        }
+      ]
     }
   ],
   "idPrefixes": [
