@@ -11,6 +11,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use("/manifests", express.static(path.join(__dirname, "manifests")));
+app.use(express.static(__dirname, { extensions: ["json"], index: false }));
 
 const PORT = process.env.PORT || 7000;
 const ADMIN_KEY = process.env.ADMIN_KEY || "";
@@ -19,7 +21,7 @@ const CACHE_DIR = path.join(__dirname, "cache");
 
 // ── Catalog definitions ──────────────────────────────────────────────────────
 
-const COUNTRY = (process.env.JUSTWATCH_COUNTRY || "US").toUpperCase();
+const COUNTRY = (process.env.JUSTWATCH_COUNTRY || "NL").toUpperCase();
 const COUNTRY_LOWER = COUNTRY.toLowerCase();
 
 const CATALOGS = [
@@ -88,25 +90,33 @@ async function refreshAll() {
 
 // Root — vriendelijke info pagina
 app.get("/", (_req, res) => {
+  const baseUrl = `${_req.protocol}://${_req.get("host")}`;
+  const catalogItems = CATALOGS.map((c) => {
+    const count = readCache(c.id)?.metas?.length || 0;
+    return `<li><a href="/catalog/${c.type}/${c.id}.json">/catalog/${c.type}/${c.id}.json</a> (${count} items) — ${c.name}</li>`;
+  }).join("\n");
+
   res.type("html").send(`<!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head><meta charset="utf-8"><title>JustWatch Nuvio Addon</title>
-<style>body{font-family:system-ui,sans-serif;max-width:600px;margin:40px auto;padding:20px;background:#111;color:#eee}a{color:#fb0}</style></head>
+<style>body{font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:20px;background:#111;color:#eee}a{color:#58a6ff}code{background:#222;padding:2px 6px;border-radius:4px;font-size:.9em}li{margin:6px 0}</style></head>
 <body>
-<h1>🎬 JustWatch Charts NL</h1>
-<p>Stremio/Nuvio catalog addon — draaiend ✅</p>
-<h2>Gebruik in Nuvio</h2>
-<p>Voeg deze URL toe als addon:</p>
-<code style="background:#222;padding:8px;display:block;word-break:break-all">${_req.protocol}://${_req.get("host")}/manifest.json</code>
-<h2>Endpoints</h2>
+<h1>🎬 JustWatch Charts ${COUNTRY}</h1>
+<p>Stremio/Nuvio catalog addon — running ✅</p>
+<h2>Manifests</h2>
 <ul>
-<li><a href="/manifest.json">/manifest.json</a></li>
-<li><a href="/catalog/movie/justwatch.us.trending_30_day.movies.json">/catalog/movie/...movies.json (Monthly)</a> (${readCache("justwatch.us.trending_30_day.movies")?.metas?.length || 0} items)</li>
-<li><a href="/catalog/movie/justwatch.us.trending_7_day.movies.json">/catalog/movie/...movies.json (Weekly)</a> (${readCache("justwatch.us.trending_7_day.movies")?.metas?.length || 0} items)</li>
-<li><a href="/catalog/series/justwatch.us.trending_30_day.series.json">/catalog/series/...series.json (Monthly)</a> (${readCache("justwatch.us.trending_30_day.series")?.metas?.length || 0} items)</li>
-<li><a href="/catalog/series/justwatch.us.trending_7_day.series.json">/catalog/series/...series.json (Weekly)</a> (${readCache("justwatch.us.trending_7_day.series")?.metas?.length || 0} items)</li>
-<li><a href="/health">/health</a></li>
+<li><a href="/manifest-nl.json"><code>/manifest-nl.json</code></a> — NL (monthly + weekly)</li>
+<li><a href="/manifest-us.json"><code>/manifest-us.json</code></a> — US (monthly + weekly)</li>
+<li><a href="/manifests/nl-monthly.json"><code>/manifests/nl-monthly.json</code></a> — NL monthly</li>
+<li><a href="/manifests/nl-weekly.json"><code>/manifests/nl-weekly.json</code></a> — NL weekly</li>
+<li><a href="/manifests/us-monthly.json"><code>/manifests/us-monthly.json</code></a> — US monthly</li>
+<li><a href="/manifests/us-weekly.json"><code>/manifests/us-weekly.json</code></a> — US weekly</li>
 </ul>
+<h2>Catalogs (server default: ${COUNTRY})</h2>
+<ul>
+${catalogItems}
+</ul>
+<p style="margin-top:20px"><a href="/health">/health</a></p>
 </body></html>`);
 });
 

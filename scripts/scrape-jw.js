@@ -151,24 +151,60 @@ function writeCache(filename, metas) {
   console.log(`  ✅ ${metas.length} items → ${filename}`);
 }
 
-function writeManifest(countryCode, catalogs) {
-  const manifest = {
-    id: "custom.justwatch.charts",
-    version: "0.1.0",
-    name: `JustWatch Charts ${countryCode}`,
-    description: `Private cached JustWatch ${countryCode} trending catalogs for Nuvio/Stremio`,
-    resources: ["catalog"],
-    types: ["movie", "series"],
-    catalogs: catalogs.map((c) => ({
-      type: c.type === "MOVIE" ? "movie" : "series",
-      id: c.file.replace(".json", ""),
-      name: `JustWatch ${countryCode} Trending ${c.type === "MOVIE" ? "Movies" : "Series"} ${c.label}`,
-    })),
-    idPrefixes: ["tt"],
-  };
-  const manifestPath = path.join(__dirname, "..", "manifest.json");
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
-  console.log(`  📄 manifest.json updated for ${countryCode}`);
+function writeManifests(countryCode, catalogs) {
+  const countryLower = countryCode.toLowerCase();
+  const manifestsDir = path.join(__dirname, "..", "manifests");
+  fs.mkdirSync(manifestsDir, { recursive: true });
+
+  // Helper: build a manifest object
+  function buildManifest(id, name, description, cats) {
+    return {
+      id,
+      version: "0.1.0",
+      name,
+      description,
+      resources: ["catalog"],
+      types: [...new Set(cats.map((c) => (c.type === "MOVIE" ? "movie" : "series")))],
+      catalogs: cats.map((c) => ({
+        type: c.type === "MOVIE" ? "movie" : "series",
+        id: c.file.replace(".json", ""),
+        name: `JustWatch ${countryCode} Trending ${c.type === "MOVIE" ? "Movies" : "Series"} ${c.label}`,
+      })),
+      idPrefixes: ["tt"],
+    };
+  }
+
+  const monthlyCats = catalogs.filter((c) => c.label === "Monthly");
+  const weeklyCats = catalogs.filter((c) => c.label === "Weekly");
+
+  // 1. Full country manifest: manifest-{country}.json
+  const full = buildManifest(
+    `custom.justwatch.charts.${countryLower}`,
+    `JustWatch Charts ${countryCode}`,
+    `Private cached JustWatch ${countryCode} trending catalogs for Nuvio/Stremio`,
+    catalogs
+  );
+  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}.json`), JSON.stringify(full, null, 2) + "\n", "utf-8");
+
+  // 2. Monthly-only manifest
+  const monthly = buildManifest(
+    `custom.justwatch.charts.${countryLower}.monthly`,
+    `JustWatch Charts ${countryCode} — Monthly`,
+    `JustWatch ${countryCode} monthly trending`,
+    monthlyCats
+  );
+  fs.writeFileSync(path.join(manifestsDir, `${countryLower}-monthly.json`), JSON.stringify(monthly, null, 2) + "\n", "utf-8");
+
+  // 3. Weekly-only manifest
+  const weekly = buildManifest(
+    `custom.justwatch.charts.${countryLower}.weekly`,
+    `JustWatch Charts ${countryCode} — Weekly`,
+    `JustWatch ${countryCode} weekly trending`,
+    weeklyCats
+  );
+  fs.writeFileSync(path.join(manifestsDir, `${countryLower}-weekly.json`), JSON.stringify(weekly, null, 2) + "\n", "utf-8");
+
+  console.log(`  📄 manifest-${countryLower}.json + manifests/${countryLower}-monthly.json + manifests/${countryLower}-weekly.json`);
 }
 
 async function main() {
@@ -204,7 +240,7 @@ async function main() {
   const seriesWeekly = readCacheCount(catalogs[3].file);
   console.log(`\n✨ Done! Monthly — Movies: ${movieMonthly}, Series: ${seriesMonthly} | Weekly — Movies: ${movieWeekly}, Series: ${seriesWeekly}`);
 
-  writeManifest(COUNTRY, catalogs);
+  writeManifests(COUNTRY, catalogs);
 }
 
 main().catch((err) => {

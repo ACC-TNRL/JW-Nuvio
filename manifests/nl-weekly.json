@@ -1,0 +1,28 @@
+{
+  "id": "custom.justwatch.charts.nl.weekly",
+  "version": "0.1.0",
+  "name": "JustWatch Charts NL — Weekly",
+  "description": "JustWatch NL weekly trending",
+  "resources": [
+    "catalog"
+  ],
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "justwatch.nl.trending_7_day.movies",
+      "name": "JustWatch NL Trending Movies Weekly"
+    },
+    {
+      "type": "series",
+      "id": "justwatch.nl.trending_7_day.series",
+      "name": "JustWatch NL Trending Series Weekly"
+    }
+  ],
+  "idPrefixes": [
+    "tt"
+  ]
+}

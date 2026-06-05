@@ -1,8 +1,8 @@
 {
-  "id": "custom.justwatch.charts",
+  "id": "custom.justwatch.charts.nl.monthly",
   "version": "0.1.0",
-  "name": "JustWatch Charts NL",
-  "description": "Private cached JustWatch NL trending catalogs for Nuvio/Stremio",
+  "name": "JustWatch Charts NL — Monthly",
+  "description": "JustWatch NL monthly trending",
   "resources": [
     "catalog"
   ],
@@ -20,16 +20,6 @@
       "type": "series",
       "id": "justwatch.nl.trending_30_day.series",
       "name": "JustWatch NL Trending Series Monthly"
-    },
-    {
-      "type": "movie",
-      "id": "justwatch.nl.trending_7_day.movies",
-      "name": "JustWatch NL Trending Movies Weekly"
-    },
-    {
-      "type": "series",
-      "id": "justwatch.nl.trending_7_day.series",
-      "name": "JustWatch NL Trending Series Weekly"
     }
   ],
   "idPrefixes": [

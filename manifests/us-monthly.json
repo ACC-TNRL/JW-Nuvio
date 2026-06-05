@@ -1,0 +1,28 @@
+{
+  "id": "custom.justwatch.charts.us.monthly",
+  "version": "0.1.0",
+  "name": "JustWatch Charts US — Monthly",
+  "description": "JustWatch US monthly trending",
+  "resources": [
+    "catalog"
+  ],
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "justwatch.us.trending_30_day.movies",
+      "name": "JustWatch US Trending Movies Monthly"
+    },
+    {
+      "type": "series",
+      "id": "justwatch.us.trending_30_day.series",
+      "name": "JustWatch US Trending Series Monthly"
+    }
+  ],
+  "idPrefixes": [
+    "tt"
+  ]
+}

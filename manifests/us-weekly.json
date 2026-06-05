@@ -1,0 +1,28 @@
+{
+  "id": "custom.justwatch.charts.us.weekly",
+  "version": "0.1.0",
+  "name": "JustWatch Charts US — Weekly",
+  "description": "JustWatch US weekly trending",
+  "resources": [
+    "catalog"
+  ],
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "justwatch.us.trending_7_day.movies",
+      "name": "JustWatch US Trending Movies Weekly"
+    },
+    {
+      "type": "series",
+      "id": "justwatch.us.trending_7_day.series",
+      "name": "JustWatch US Trending Series Weekly"
+    }
+  ],
+  "idPrefixes": [
+    "tt"
+  ]
+}
