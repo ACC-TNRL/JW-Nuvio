@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "refresh": "node scripts/scrape-jw.js"
+    "refresh": "node scripts/scrape-jw.js",
+    "refresh-fv": "node scripts/scrape-fv.js",
+    "refresh-all": "node scripts/scrape-jw.js && node scripts/scrape-fv.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

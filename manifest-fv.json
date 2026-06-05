@@ -1,0 +1,28 @@
+{
+  "id": "custom.filmvandaag.popular",
+  "version": "0.1.0",
+  "name": "FilmVandaag Popular",
+  "description": "Popular movies & series from FilmVandaag.nl for Nuvio/Stremio",
+  "resources": [
+    "catalog"
+  ],
+  "types": [
+    "movie",
+    "series"
+  ],
+  "catalogs": [
+    {
+      "type": "movie",
+      "id": "filmvandaag.nl.popular.movies",
+      "name": "FilmVandaag Popular Movies"
+    },
+    {
+      "type": "series",
+      "id": "filmvandaag.nl.popular.series",
+      "name": "FilmVandaag Popular Series"
+    }
+  ],
+  "idPrefixes": [
+    "tt"
+  ]
+}

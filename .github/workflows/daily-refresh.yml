@@ -36,6 +36,12 @@ jobs:
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
         run: npm run refresh
 
+      - name: Scrape FilmVandaag & update cache
+        env:
+          ERDB_TOKEN: ${{ secrets.ERDB_TOKEN || '' }}
+          ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
+        run: npm run refresh-fv
+
       - name: Copy cache to repo root (for GitHub Pages)
         run: |
           mkdir -p catalog/movie catalog/series
@@ -50,6 +56,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to cache"
           else
-            git commit -m "chore: daily JustWatch NL cache refresh [skip ci]"
+            git commit -m "chore: daily cache refresh [skip ci]"
             git push
           fi
