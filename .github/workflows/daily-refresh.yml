@@ -42,11 +42,12 @@ jobs:
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
         run: npm run refresh-fv
 
-      - name: Copy cache to repo root (for GitHub Pages)
+      - name: Copy cache to catalog dirs + root (for GitHub Pages & Nuvio)
         run: |
           mkdir -p catalog/movie catalog/series
           cp cache/*.movies.json catalog/movie/
           cp cache/*.series.json catalog/series/
+          cp cache/*.json .
 
       - name: Commit & push cache
         run: |
