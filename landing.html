@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JustWatch Nuvio Addon</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 20px; }
+    h1 {
+      font-size: 1.8rem;
+      color: #f0f6fc;
+      margin-bottom: 6px;
+    }
+    .subtitle { color: #8b949e; margin-bottom: 32px; font-size: 0.95rem; }
+    h2 {
+      font-size: 1.1rem;
+      color: #f0f6fc;
+      margin: 28px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #21262d;
+    }
+    .card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .card-info { min-width: 0; flex: 1; }
+    .card-name {
+      font-weight: 600;
+      color: #f0f6fc;
+      font-size: 0.95rem;
+      word-break: break-all;
+    }
+    .card-desc {
+      color: #8b949e;
+      font-size: 0.82rem;
+      margin-top: 3px;
+    }
+    .card-meta {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: #1c2533;
+      color: #58a6ff;
+      border: 1px solid #30363d;
+    }
+    .tag.green { color: #3fb950; }
+    .tag.purple { color: #bc8cff; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      padding: 7px 14px;
+      font-size: 0.82rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s;
+      font-family: inherit;
+    }
+    .btn:hover { background: #30363d; }
+    .btn.copied { background: #1a3a2a; border-color: #3fb950; color: #3fb950; }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .section-desc { color: #8b949e; font-size: 0.85rem; margin-bottom: 12px; }
+    .footer {
+      text-align: center;
+      color: #484f58;
+      font-size: 0.75rem;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #21262d;
+    }
+    @media (max-width: 500px) {
+      .card { flex-direction: column; align-items: flex-start; }
+      .container { padding: 24px 14px; }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>🎬 JustWatch Nuvio Addon</h1>
+  <p class="subtitle">Private Stremio-compatible catalog addon with JustWatch trending charts for Nuvio. Each manifest below can be added as a separate addon in Nuvio.</p>
+
+  <h2>📦 Full Manifests (all time periods)</h2>
+  <p class="section-desc">One manifest per country — includes both monthly &amp; weekly charts.</p>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-nl.json</div>
+      <div class="card-desc">JustWatch Netherlands trending — monthly + weekly</div>
+      <div class="card-meta">
+        <span class="tag green">NL</span><span class="tag">Monthly</span><span class="tag">Weekly</span><span class="tag purple">Movies</span><span class="tag purple">Series</span>
+      </div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-nl.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-us.json</div>
+      <div class="card-desc">JustWatch United States trending — monthly + weekly</div>
+      <div class="card-meta">
+        <span class="tag green">US</span><span class="tag">Monthly</span><span class="tag">Weekly</span><span class="tag purple">Movies</span><span class="tag purple">Series</span>
+      </div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-us.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <h2>📅 Split Manifests (one time period per country)</h2>
+  <p class="section-desc">Add only the time period you want. Monthly = 30-day trending, Weekly = 7-day trending.</p>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-nl-monthly.json</div>
+      <div class="card-desc">NL — monthly trending only</div>
+      <div class="card-meta"><span class="tag green">NL</span><span class="tag">Monthly</span></div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-nl-monthly.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-nl-weekly.json</div>
+      <div class="card-desc">NL — weekly trending only</div>
+      <div class="card-meta"><span class="tag green">NL</span><span class="tag">Weekly</span></div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-nl-weekly.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-us-monthly.json</div>
+      <div class="card-desc">US — monthly trending only</div>
+      <div class="card-meta"><span class="tag green">US</span><span class="tag">Monthly</span></div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-us-monthly.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-us-weekly.json</div>
+      <div class="card-desc">US — weekly trending only</div>
+      <div class="card-meta"><span class="tag green">US</span><span class="tag">Weekly</span></div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-us-weekly.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <h2>🇳🇱 FilmVandaag.nl — Popular in the Netherlands</h2>
+  <p class="section-desc">Dutch popular movies &amp; series from FilmVandaag.nl. Scraped daily, IMDb IDs from detail pages.</p>
+
+  <div class="card">
+    <div class="card-info">
+      <div class="card-name">manifest-fv.json</div>
+      <div class="card-desc">FilmVandaag popular movies + series</div>
+      <div class="card-meta">
+        <span class="tag green">NL</span><span class="tag purple">Movies</span><span class="tag purple">Series</span>
+      </div>
+    </div>
+    <button class="btn" onclick="copyUrl(this, 'manifest-fv.json')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      Copy URL
+    </button>
+  </div>
+
+  <p class="footer">JustWatch Nuvio Addon · Data from JustWatch streaming charts &amp; FilmVandaag.nl · For use with <a href="https://nuvio.tv/" style="color:#58a6ff;">Nuvio</a></p>
+</div>
+
+<script>
+  function copyUrl(btn, path) {
+    const url = location.origin + location.pathname.replace(/\/?$/, '/') + path;
+    navigator.clipboard.writeText(url).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy URL';
+      }, 2000);
+    });
+  }
+</script>
+</body>
+</html>
