@@ -14,22 +14,34 @@
     {
       "type": "movie",
       "id": "justwatch.nl.trending_30_day.movies",
-      "name": "JustWatch NL Trending Movies Monthly"
+      "name": "JustWatch NL Trending Movies Monthly",
+      "extra": {
+        "skip": true
+      }
     },
     {
       "type": "series",
       "id": "justwatch.nl.trending_30_day.series",
-      "name": "JustWatch NL Trending Series Monthly"
+      "name": "JustWatch NL Trending Series Monthly",
+      "extra": {
+        "skip": true
+      }
     },
     {
       "type": "movie",
       "id": "justwatch.nl.trending_7_day.movies",
-      "name": "JustWatch NL Trending Movies Weekly"
+      "name": "JustWatch NL Trending Movies Weekly",
+      "extra": {
+        "skip": true
+      }
     },
     {
       "type": "series",
       "id": "justwatch.nl.trending_7_day.series",
-      "name": "JustWatch NL Trending Series Weekly"
+      "name": "JustWatch NL Trending Series Weekly",
+      "extra": {
+        "skip": true
+      }
     }
   ],
   "idPrefixes": [

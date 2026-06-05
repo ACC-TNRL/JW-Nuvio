@@ -32,6 +32,11 @@ function cacheExists(id) {
 // Write one addon: manifest.json + catalog/{movie,series}/<id>.json into subdir.
 // Pass subdir = "" to publish at repository root.
 function writeAddon(subdir, manifest) {
+  // Ensure every catalog has skip:true so they only appear in
+  // Discover/Collections, not duplicated on the Stremio/Nuvio home screen.
+  for (const cat of manifest.catalogs) {
+    cat.extra = { skip: true };
+  }
   const dir = subdir ? path.join(ROOT, subdir) : ROOT;
   fs.mkdirSync(path.join(dir, "catalog", "movie"), { recursive: true });
   fs.mkdirSync(path.join(dir, "catalog", "series"), { recursive: true });

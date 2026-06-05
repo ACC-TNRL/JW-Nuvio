@@ -14,12 +14,18 @@
     {
       "type": "movie",
       "id": "filmvandaag.nl.popular.movies",
-      "name": "FilmVandaag Popular Movies"
+      "name": "FilmVandaag Popular Movies",
+      "extra": {
+        "skip": true
+      }
     },
     {
       "type": "series",
       "id": "filmvandaag.nl.popular.series",
-      "name": "FilmVandaag Popular Series"
+      "name": "FilmVandaag Popular Series",
+      "extra": {
+        "skip": true
+      }
     }
   ],
   "idPrefixes": [
