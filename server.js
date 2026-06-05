@@ -22,6 +22,8 @@ const CACHE_DIR = path.join(__dirname, "cache");
 const CATALOGS = [
   { type: "movie", id: "justwatch.us.trending_30_day.movies", name: "JustWatch US Trending Movies" },
   { type: "series", id: "justwatch.us.trending_30_day.series", name: "JustWatch US Trending Series" },
+  { type: "movie", id: "justwatch.us.trending_7_day.movies", name: "JustWatch US Trending Movies (Weekly)" },
+  { type: "series", id: "justwatch.us.trending_7_day.series", name: "JustWatch US Trending Series (Weekly)" },
 ];
 
 const MANIFEST = {
@@ -96,8 +98,10 @@ app.get("/", (_req, res) => {
 <h2>Endpoints</h2>
 <ul>
 <li><a href="/manifest.json">/manifest.json</a></li>
-<li><a href="/catalog/movie/justwatch.nl.trending_30_day.movies.json">/catalog/movie/...movies.json</a> (${readCache("justwatch.nl.trending_30_day.movies")?.metas?.length || 0} items)</li>
-<li><a href="/catalog/series/justwatch.nl.trending_30_day.series.json">/catalog/series/...series.json</a> (${readCache("justwatch.nl.trending_30_day.series")?.metas?.length || 0} items)</li>
+<li><a href="/catalog/movie/justwatch.us.trending_30_day.movies.json">/catalog/movie/...movies.json (Monthly)</a> (${readCache("justwatch.us.trending_30_day.movies")?.metas?.length || 0} items)</li>
+<li><a href="/catalog/movie/justwatch.us.trending_7_day.movies.json">/catalog/movie/...movies.json (Weekly)</a> (${readCache("justwatch.us.trending_7_day.movies")?.metas?.length || 0} items)</li>
+<li><a href="/catalog/series/justwatch.us.trending_30_day.series.json">/catalog/series/...series.json (Monthly)</a> (${readCache("justwatch.us.trending_30_day.series")?.metas?.length || 0} items)</li>
+<li><a href="/catalog/series/justwatch.us.trending_7_day.series.json">/catalog/series/...series.json (Weekly)</a> (${readCache("justwatch.us.trending_7_day.series")?.metas?.length || 0} items)</li>
 <li><a href="/health">/health</a></li>
 </ul>
 </body></html>`);

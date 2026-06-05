@@ -1,33 +1,24 @@
 # JustWatch Nuvio Addon
 
-Private/experimental Stremio-compatible catalog addon die JustWatch NL trending data als dynamische collecties aanbiedt voor gebruik in [Nuvio](https://nuvio.tv/).
+Private/experimental Stremio-compatible catalog addon die JustWatch US trending data (monthly & weekly) als dynamische collecties aanbiedt voor gebruik in [Nuvio](https://nuvio.tv/).
 
 ## Hoe het werkt
 
-1. Een **scraper** (`scripts/scrape-jw.js`) downloadt de JustWatch NL trending pagina's
-2. Extraheert TMDB IDs en titels uit de Apollo GraphQL state in de HTML
-3. Converteert TMDB IDs → IMDb IDs via de TMDB API (gratis)
-4. Schrijft Stremio-compatible cache JSON-bestanden
-5. De Express server leest alleen uit cache — geen live API calls
-6. **GitHub Actions** draait de scraper dagelijks en commit de cache naar de repo
+1. Een **scraper** (`scripts/scrape-jw.js`) gebruikt de JustWatch GraphQL API (streamingCharts)
+2. Haalt IMDb IDs direct uit de GraphQL response — geen TMDB API nodig
+3. Schrijft Stremio-compatible cache JSON-bestanden (monthly + weekly)
+4. De Express server leest alleen uit cache — geen live API calls
+5. **GitHub Actions** draait de scraper dagelijks en commit de cache naar de repo
 
 ## ⚠️ Belangrijk
 
 - Dit is een **private/experimental** addon
 - De JustWatch GraphQL API is unofficial/undocumented
-- De scraper gebruikt de publieke JustWatch webpagina's (geen API key nodig)
-- Voor IMDb ID conversie is een **gratis TMDB API key** nodig
+- IMDb IDs komen direct uit de GraphQL API — geen TMDB API key nodig
 
 ## Setup
 
-### 1. TMDB API key (nodig voor IMDb IDs)
-
-1. Ga naar [https://www.themoviedb.org/settings/api](https://www.themoviedb.org/settings/api)
-2. Registreer een gratis account
-3. Vraag een API key aan (type: Developer)
-4. Zet in `.env`: `TMDB_API_KEY=jouw-key`
-
-### 2. Lokaal draaien
+### 1. Lokaal draaien
 
 ```bash
 npm install
@@ -37,26 +28,26 @@ npm run refresh   # scrape JustWatch + update cache
 npm start         # server starten op poort 7000
 ```
 
-### 3. GitHub Actions (dagelijkse refresh)
+### 2. GitHub Actions (dagelijkse refresh)
 
-1. Ga naar repo **Settings → Secrets and variables → Actions**
-2. Voeg **Repository secret** toe: `TMDB_API_KEY` = jouw TMDB API key
-3. Optioneel: `ERDB_TOKEN` als je ERDB posters wilt
-4. De workflow draait dagelijks om 08:00 NL tijd
+1. Optioneel: voeg `ERDB_TOKEN` toe als **Repository secret** voor ERDB posters
+2. De workflow draait dagelijks om 08:00 NL tijd
 
 Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
 
 ## Endpoints
 
 - `GET /manifest.json` — Stremio manifest
-- `GET /catalog/movie/justwatch.nl.trending_30_day.movies.json` — Movies catalog
-- `GET /catalog/series/justwatch.nl.trending_30_day.series.json` — Series catalog
+- `GET /catalog/movie/justwatch.us.trending_30_day.movies.json` — Movies catalog (Monthly)
+- `GET /catalog/movie/justwatch.us.trending_7_day.movies.json` — Movies catalog (Weekly)
+- `GET /catalog/series/justwatch.us.trending_30_day.series.json` — Series catalog (Monthly)
+- `GET /catalog/series/justwatch.us.trending_7_day.series.json` — Series catalog (Weekly)
 - `POST /admin/refresh` — Refresh cache (vereist `x-admin-key` header)
 - `GET /health` — Health check
 
 ## Nuvio source configuratie
 
-**Movies:**
+**Movies (Monthly):**
 
 ```json
 {
@@ -64,11 +55,23 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
   "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.nl.trending_30_day.movies"
+  "catalogId": "justwatch.us.trending_30_day.movies"
 }
 ```
 
-**Series:**
+**Movies (Weekly):**
+
+```json
+{
+  "type": "movie",
+  "genre": "",
+  "addonId": "custom.justwatch.charts",
+  "provider": "addon",
+  "catalogId": "justwatch.us.trending_7_day.movies"
+}
+```
+
+**Series (Monthly):**
 
 ```json
 {
@@ -76,7 +79,19 @@ Handmatig triggeren: **Actions → Daily Refresh JustWatch NL → Run workflow**
   "genre": "",
   "addonId": "custom.justwatch.charts",
   "provider": "addon",
-  "catalogId": "justwatch.nl.trending_30_day.series"
+  "catalogId": "justwatch.us.trending_30_day.series"
+}
+```
+
+**Series (Weekly):**
+
+```json
+{
+  "type": "series",
+  "genre": "",
+  "addonId": "custom.justwatch.charts",
+  "provider": "addon",
+  "catalogId": "justwatch.us.trending_7_day.series"
 }
 ```
 
@@ -104,9 +119,8 @@ De addon is een simpele Node.js Express app. Omdat de cache in de repo staat (vi
 |---|---|---|
 | `PORT` | `7000` | Server poort |
 | `ADMIN_KEY` | `change-me` | Key voor `/admin/refresh` |
-| `TMDB_API_KEY` | (leeg) | TMDB API key voor IMDb ID conversie |
 | `ERDB_TOKEN` | (leeg) | ERDB token voor poster URLs |
 | `ERDB_BASE_URL` | `https://easyratingsdb.com` | ERDB base URL |
-| `JUSTWATCH_COUNTRY` | `NL` | JustWatch landcode |
-| `JUSTWATCH_LANGUAGE` | `nl` | JustWatch taal |
+| `JUSTWATCH_COUNTRY` | `US` | JustWatch landcode |
+| `JUSTWATCH_LANGUAGE` | `en` | JustWatch taal |
 | `CATALOG_LIMIT` | `50` | Aantal titels per catalog |

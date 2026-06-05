@@ -12,9 +12,19 @@
       "name": "JustWatch US Trending Movies"
     },
     {
+      "type": "movie",
+      "id": "justwatch.us.trending_7_day.movies",
+      "name": "JustWatch US Trending Movies (Weekly)"
+    },
+    {
       "type": "series",
       "id": "justwatch.us.trending_30_day.series",
       "name": "JustWatch US Trending Series"
+    },
+    {
+      "type": "series",
+      "id": "justwatch.us.trending_7_day.series",
+      "name": "JustWatch US Trending Series (Weekly)"
     }
   ],
   "idPrefixes": ["tt"]

@@ -40,6 +40,8 @@ jobs:
         run: |
           cp cache/justwatch.us.trending_30_day.movies.json catalog/movie/justwatch.us.trending_30_day.movies.json
           cp cache/justwatch.us.trending_30_day.series.json catalog/series/justwatch.us.trending_30_day.series.json
+          cp cache/justwatch.us.trending_7_day.movies.json catalog/movie/justwatch.us.trending_7_day.movies.json
+          cp cache/justwatch.us.trending_7_day.series.json catalog/series/justwatch.us.trending_7_day.series.json
 
       - name: Commit & push cache
         run: |

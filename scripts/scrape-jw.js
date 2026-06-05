@@ -63,7 +63,7 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-async function fetchStreamingChart(objectType) {
+async function fetchStreamingChart(objectType, category = "MONTHLY_POPULARITY_SAME_CONTENT_TYPE") {
   const body = {
     operationName: "GetStreamingChartInfo",
     query: STREAMING_CHARTS_QUERY,
@@ -74,7 +74,7 @@ async function fetchStreamingChart(objectType) {
       first: CATALOG_LIMIT,
       filter: {
         objectType,
-        category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE",
+        category,
       },
     },
   };
@@ -131,6 +131,15 @@ async function fetchStreamingChart(objectType) {
   return [];
 }
 
+function readCacheCount(file) {
+  try {
+    const raw = fs.readFileSync(path.join(CACHE_DIR, file), "utf-8");
+    return JSON.parse(raw).metas?.length || 0;
+  } catch {
+    return 0;
+  }
+}
+
 function writeCache(filename, metas) {
   if (!metas || metas.length === 0) {
     console.log(`  ⚠️  0 items — keeping existing cache`);
@@ -144,19 +153,21 @@ function writeCache(filename, metas) {
 
 async function main() {
   const label = COUNTRY === "GLOBAL" ? "US (global)" : COUNTRY;
-  console.log(`🔄 JustWatch Streaming Charts — ${label} (monthly / 30-day trending)`);
+  console.log(`🔄 JustWatch Streaming Charts — ${label}`);
   console.log(`   Same data source as ERDB ranking badges\n`);
 
   const catalogs = [
-    { type: "MOVIE", file: "justwatch.us.trending_30_day.movies.json" },
-    { type: "SHOW", file: "justwatch.us.trending_30_day.series.json" },
+    { type: "MOVIE", file: "justwatch.us.trending_30_day.movies.json", category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
+    { type: "SHOW", file: "justwatch.us.trending_30_day.series.json", category: "MONTHLY_POPULARITY_SAME_CONTENT_TYPE", label: "Monthly" },
+    { type: "MOVIE", file: "justwatch.us.trending_7_day.movies.json", category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
+    { type: "SHOW", file: "justwatch.us.trending_7_day.series.json", category: "WEEKLY_POPULARITY_SAME_CONTENT_TYPE", label: "Weekly" },
   ];
 
   for (const catalog of catalogs) {
     const typeLabel = catalog.type === "MOVIE" ? "Movies" : "Series";
-    console.log(`📡 Fetching ${typeLabel}…`);
+    console.log(`📡 Fetching ${typeLabel} (${catalog.label})…`);
     try {
-      const metas = await fetchStreamingChart(catalog.type);
+      const metas = await fetchStreamingChart(catalog.type, catalog.category);
       writeCache(catalog.file, metas);
     } catch (err) {
       console.error(`  ❌ Failed: ${err.message}`);
@@ -166,9 +177,11 @@ async function main() {
     }
   }
 
-  const movieCount = JSON.parse(fs.readFileSync(path.join(CACHE_DIR, catalogs[0].file), "utf-8")).metas.length;
-  const seriesCount = JSON.parse(fs.readFileSync(path.join(CACHE_DIR, catalogs[1].file), "utf-8")).metas.length;
-  console.log(`\n✨ Done! Movies: ${movieCount}, Series: ${seriesCount}`);
+  const movieMonthly = readCacheCount(catalogs[0].file);
+  const seriesMonthly = readCacheCount(catalogs[1].file);
+  const movieWeekly = readCacheCount(catalogs[2].file);
+  const seriesWeekly = readCacheCount(catalogs[3].file);
+  console.log(`\n✨ Done! Monthly — Movies: ${movieMonthly}, Series: ${seriesMonthly} | Weekly — Movies: ${movieWeekly}, Series: ${seriesWeekly}`);
 }
 
 main().catch((err) => {
