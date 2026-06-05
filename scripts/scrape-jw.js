@@ -153,6 +153,7 @@ function writeCache(filename, metas) {
 
 function writeManifests(countryCode, catalogs) {
   const countryLower = countryCode.toLowerCase();
+  const ROOT = path.join(__dirname, "..");
 
   // Helper: build a manifest object
   function buildManifest(id, name, description, cats) {
@@ -172,37 +173,58 @@ function writeManifests(countryCode, catalogs) {
     };
   }
 
+  // Helper: write an addon into its own subdirectory.
+  // Stremio/Nuvio derives catalog URLs by stripping `manifest.json` from the
+  // transport URL, so EACH addon must live in its own folder with a file
+  // literally named `manifest.json` plus its own catalog/ tree.
+  function writeAddon(subdir, manifest) {
+    const dir = subdir ? path.join(ROOT, subdir) : ROOT;
+    fs.mkdirSync(path.join(dir, "catalog", "movie"), { recursive: true });
+    fs.mkdirSync(path.join(dir, "catalog", "series"), { recursive: true });
+    fs.writeFileSync(path.join(dir, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+    for (const cat of manifest.catalogs) {
+      const src = path.join(CACHE_DIR, `${cat.id}.json`);
+      const dest = path.join(dir, "catalog", cat.type, `${cat.id}.json`);
+      if (fs.existsSync(src)) fs.copyFileSync(src, dest);
+    }
+  }
+
   const monthlyCats = catalogs.filter((c) => c.label === "Monthly");
   const weeklyCats = catalogs.filter((c) => c.label === "Weekly");
 
-  // 1. Full country manifest: manifest-{country}.json
+  // Full country addon → /{country}/manifest.json
   const full = buildManifest(
     `custom.justwatch.charts.${countryLower}`,
     `JustWatch Charts ${countryCode}`,
     `Private cached JustWatch ${countryCode} trending catalogs for Nuvio/Stremio`,
     catalogs
   );
-  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}.json`), JSON.stringify(full, null, 2) + "\n", "utf-8");
+  writeAddon(countryLower, full);
 
-  // 2. Monthly-only manifest
+  // Monthly addon → /{country}-monthly/manifest.json
   const monthly = buildManifest(
     `custom.justwatch.charts.${countryLower}.monthly`,
     `JustWatch Charts ${countryCode} — Monthly`,
     `JustWatch ${countryCode} monthly trending`,
     monthlyCats
   );
-  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}-monthly.json`), JSON.stringify(monthly, null, 2) + "\n", "utf-8");
+  writeAddon(`${countryLower}-monthly`, monthly);
 
-  // 3. Weekly-only manifest
+  // Weekly addon → /{country}-weekly/manifest.json
   const weekly = buildManifest(
     `custom.justwatch.charts.${countryLower}.weekly`,
     `JustWatch Charts ${countryCode} — Weekly`,
     `JustWatch ${countryCode} weekly trending`,
     weeklyCats
   );
-  fs.writeFileSync(path.join(__dirname, "..", `manifest-${countryLower}-weekly.json`), JSON.stringify(weekly, null, 2) + "\n", "utf-8");
+  writeAddon(`${countryLower}-weekly`, weekly);
 
-  console.log(`  📄 manifest-${countryLower}.json + manifest-${countryLower}-monthly.json + manifest-${countryLower}-weekly.json`);
+  // NL is the default → also publish at root (/manifest.json + /catalog)
+  if (countryCode === "NL") {
+    writeAddon("", full);
+  }
+
+  console.log(`  📁 ${countryLower}/ + ${countryLower}-monthly/ + ${countryLower}-weekly/ (each with manifest.json + catalog/)`);
 }
 
 async function main() {

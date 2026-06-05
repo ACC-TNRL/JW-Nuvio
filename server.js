@@ -11,7 +11,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use("/manifests", express.static(path.join(__dirname, "manifests")));
 app.use(express.static(__dirname, { extensions: ["json"], index: false }));
 
 const PORT = process.env.PORT || 7000;
@@ -105,12 +104,14 @@ app.get("/", (_req, res) => {
 <p>Stremio/Nuvio catalog addon — running ✅</p>
 <h2>Manifests</h2>
 <ul>
-<li><a href="/manifest-nl.json"><code>/manifest-nl.json</code></a> — NL (monthly + weekly)</li>
-<li><a href="/manifest-us.json"><code>/manifest-us.json</code></a> — US (monthly + weekly)</li>
-<li><a href="/manifests/nl-monthly.json"><code>/manifests/nl-monthly.json</code></a> — NL monthly</li>
-<li><a href="/manifests/nl-weekly.json"><code>/manifests/nl-weekly.json</code></a> — NL weekly</li>
-<li><a href="/manifests/us-monthly.json"><code>/manifests/us-monthly.json</code></a> — US monthly</li>
-<li><a href="/manifests/us-weekly.json"><code>/manifests/us-weekly.json</code></a> — US weekly</li>
+<li><a href="/manifest.json"><code>/manifest.json</code></a> — NL default (monthly + weekly)</li>
+<li><a href="/nl/manifest.json"><code>/nl/manifest.json</code></a> — NL (monthly + weekly)</li>
+<li><a href="/us/manifest.json"><code>/us/manifest.json</code></a> — US (monthly + weekly)</li>
+<li><a href="/nl-monthly/manifest.json"><code>/nl-monthly/manifest.json</code></a> — NL monthly</li>
+<li><a href="/nl-weekly/manifest.json"><code>/nl-weekly/manifest.json</code></a> — NL weekly</li>
+<li><a href="/us-monthly/manifest.json"><code>/us-monthly/manifest.json</code></a> — US monthly</li>
+<li><a href="/us-weekly/manifest.json"><code>/us-weekly/manifest.json</code></a> — US weekly</li>
+<li><a href="/fv/manifest.json"><code>/fv/manifest.json</code></a> — FilmVandaag popular</li>
 </ul>
 <h2>Catalogs (server default: ${COUNTRY})</h2>
 <ul>

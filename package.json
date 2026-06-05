@@ -6,9 +6,10 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "build": "node scripts/build-addons.js",
     "refresh": "node scripts/scrape-jw.js",
     "refresh-fv": "node scripts/scrape-fv.js",
-    "refresh-all": "node scripts/scrape-jw.js && node scripts/scrape-fv.js"
+    "refresh-all": "JUSTWATCH_COUNTRY=NL node scripts/scrape-jw.js && JUSTWATCH_COUNTRY=US node scripts/scrape-jw.js && node scripts/scrape-fv.js && node scripts/build-addons.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

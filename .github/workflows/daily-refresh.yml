@@ -8,6 +8,8 @@ on:
   push:
     paths:
       - "scripts/scrape-jw.js" # Herdraaien als scraper verandert
+      - "scripts/scrape-fv.js"
+      - "scripts/build-addons.js"
 
 jobs:
   refresh:
@@ -27,14 +29,22 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Scrape JustWatch & update cache
+      - name: Scrape JustWatch NL & update cache
         env:
-          JUSTWATCH_COUNTRY: ${{ vars.JUSTWATCH_COUNTRY || 'NL' }}
+          JUSTWATCH_COUNTRY: "NL"
           JUSTWATCH_LANGUAGE: ${{ vars.JUSTWATCH_LANGUAGE || 'nl' }}
           CATALOG_LIMIT: ${{ vars.CATALOG_LIMIT || '50' }}
           ERDB_TOKEN: ${{ secrets.ERDB_TOKEN || '' }}
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
-        run: npm run refresh
+        run: JUSTWATCH_COUNTRY=NL npm run refresh
+
+      - name: Scrape JustWatch US & update cache
+        env:
+          JUSTWATCH_LANGUAGE: "en"
+          CATALOG_LIMIT: ${{ vars.CATALOG_LIMIT || '50' }}
+          ERDB_TOKEN: ${{ secrets.ERDB_TOKEN || '' }}
+          ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
+        run: JUSTWATCH_COUNTRY=US npm run refresh
 
       - name: Scrape FilmVandaag & update cache
         env:
@@ -42,18 +52,17 @@ jobs:
           ERDB_BASE_URL: ${{ vars.ERDB_BASE_URL || 'https://easyratingsdb.com' }}
         run: npm run refresh-fv
 
-      - name: Copy cache to catalog dirs + root (for GitHub Pages & Nuvio)
-        run: |
-          mkdir -p catalog/movie catalog/series
-          cp cache/*.movies.json catalog/movie/
-          cp cache/*.series.json catalog/series/
-          cp cache/*.json .
+      - name: Build addon subdirectories from cache
+        run: npm run build
 
-      - name: Commit & push cache
+      - name: Commit & push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add cache/*.json manifest-*.json catalog/ index.html
+          git add cache/ catalog/ manifest.json \
+            nl/ nl-monthly/ nl-weekly/ \
+            us/ us-monthly/ us-weekly/ \
+            fv/ index.html landing.html
           if git diff --staged --quiet; then
             echo "No changes to cache"
           else

@@ -147,7 +147,7 @@ function writeCache(filename, metas) {
   console.log(`  ✅ ${metas.length} items → ${filename}`);
 }
 
-function writeManifest(filename, name, description, catalogs) {
+function writeManifest(subdir, name, description, catalogs) {
   const manifest = {
     id: "custom.filmvandaag.popular",
     version: "0.1.0",
@@ -159,9 +159,19 @@ function writeManifest(filename, name, description, catalogs) {
     idPrefixes: ["tt"],
   };
 
-  const manifestPath = path.join(__dirname, "..", filename);
-  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + "\n", "utf-8");
-  console.log(`  📄 ${filename}`);
+  // Each addon lives in its own folder with a file literally named
+  // `manifest.json` plus its own catalog/ tree, so Stremio/Nuvio can derive
+  // catalog URLs by stripping `manifest.json` from the transport URL.
+  const dir = path.join(__dirname, "..", subdir);
+  fs.mkdirSync(path.join(dir, "catalog", "movie"), { recursive: true });
+  fs.mkdirSync(path.join(dir, "catalog", "series"), { recursive: true });
+  fs.writeFileSync(path.join(dir, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n", "utf-8");
+  for (const cat of catalogs) {
+    const src = path.join(CACHE_DIR, `${cat.id}.json`);
+    const dest = path.join(dir, "catalog", cat.type, `${cat.id}.json`);
+    if (fs.existsSync(src)) fs.copyFileSync(src, dest);
+  }
+  console.log(`  📁 ${subdir}/ (manifest.json + catalog/)`);
 }
 
 // ── Main ────────────────────────────────────────────────────────────────────
@@ -197,7 +207,7 @@ async function main() {
 
   if (catalogs.length > 0) {
     writeManifest(
-      "manifest-fv.json",
+      "fv",
       "FilmVandaag Popular",
       "Popular movies & series from FilmVandaag.nl for Nuvio/Stremio",
       catalogs

@@ -2,7 +2,7 @@
   "id": "custom.justwatch.charts.nl.weekly",
   "version": "0.1.0",
   "name": "JustWatch Charts NL — Weekly",
-  "description": "JustWatch NL weekly trending",
+  "description": "Private cached JustWatch NL trending catalogs for Nuvio/Stremio",
   "resources": [
     "catalog"
   ],
