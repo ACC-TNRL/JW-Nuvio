@@ -55,6 +55,12 @@
       "poster": "https://images.metahub.space/poster/medium/tt33332385/img"
     },
     {
+      "id": "tt36937503",
+      "type": "series",
+      "name": "Anna Pigeon",
+      "poster": "https://images.metahub.space/poster/medium/tt36937503/img"
+    },
+    {
       "id": "tt27497393",
       "type": "series",
       "name": "Stuart Fails to Save the Universe",
@@ -287,12 +293,6 @@
       "type": "series",
       "name": "Landman",
       "poster": "https://images.metahub.space/poster/medium/tt14186672/img"
-    },
-    {
-      "id": "tt40385200",
-      "type": "series",
-      "name": "World War II with Tom Hanks",
-      "poster": "https://images.metahub.space/poster/medium/tt40385200/img"
     }
   ]
 }
