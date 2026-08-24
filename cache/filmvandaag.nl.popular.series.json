@@ -25,28 +25,22 @@
       "poster": "https://images.metahub.space/poster/medium/tt26545992/img"
     },
     {
-      "id": "tt35495063",
-      "type": "series",
-      "name": "G.I.G.N",
-      "poster": "https://images.metahub.space/poster/medium/tt35495063/img"
-    },
-    {
       "id": "tt38553367",
       "type": "series",
       "name": "Blodsoffer",
       "poster": "https://images.metahub.space/poster/medium/tt38553367/img"
     },
     {
+      "id": "tt35495063",
+      "type": "series",
+      "name": "G.I.G.N",
+      "poster": "https://images.metahub.space/poster/medium/tt35495063/img"
+    },
+    {
       "id": "tt35618070",
       "type": "series",
       "name": "Sterling Point",
       "poster": "https://images.metahub.space/poster/medium/tt35618070/img"
-    },
-    {
-      "id": "tt33265765",
-      "type": "series",
-      "name": "Legends",
-      "poster": "https://images.metahub.space/poster/medium/tt33265765/img"
     },
     {
       "id": "tt30494226",
@@ -61,22 +55,28 @@
       "poster": "https://images.metahub.space/poster/medium/tt0903747/img"
     },
     {
+      "id": "tt33265765",
+      "type": "series",
+      "name": "Legends",
+      "poster": "https://images.metahub.space/poster/medium/tt33265765/img"
+    },
+    {
       "id": "tt9288030",
       "type": "series",
       "name": "Reacher",
       "poster": "https://images.metahub.space/poster/medium/tt9288030/img"
     },
     {
-      "id": "tt14688458",
-      "type": "series",
-      "name": "Silo",
-      "poster": "https://images.metahub.space/poster/medium/tt14688458/img"
-    },
-    {
       "id": "tt27497448",
       "type": "series",
       "name": "A Knight of the Seven Kingdoms",
       "poster": "https://images.metahub.space/poster/medium/tt27497448/img"
+    },
+    {
+      "id": "tt14688458",
+      "type": "series",
+      "name": "Silo",
+      "poster": "https://images.metahub.space/poster/medium/tt14688458/img"
     },
     {
       "id": "tt37352716",
@@ -97,6 +97,12 @@
       "poster": "https://images.metahub.space/poster/medium/tt34991493/img"
     },
     {
+      "id": "tt43725623",
+      "type": "series",
+      "name": "Conversations with a Killer: The Charles Manson Tapes",
+      "poster": "https://images.metahub.space/poster/medium/tt43725623/img"
+    },
+    {
       "id": "tt43680755",
       "type": "series",
       "name": "The Idaho Murders: College Nightmare",
@@ -115,12 +121,6 @@
       "poster": "https://images.metahub.space/poster/medium/tt37022512/img"
     },
     {
-      "id": "tt43725623",
-      "type": "series",
-      "name": "Conversations with a Killer: The Charles Manson Tapes",
-      "poster": "https://images.metahub.space/poster/medium/tt43725623/img"
-    },
-    {
       "id": "tt10986410",
       "type": "series",
       "name": "Ted Lasso",
@@ -133,28 +133,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt26656917/img"
     },
     {
-      "id": "tt31495377",
-      "type": "series",
-      "name": "Patience",
-      "poster": "https://images.metahub.space/poster/medium/tt31495377/img"
-    },
-    {
-      "id": "tt0944947",
-      "type": "series",
-      "name": "Game of Thrones",
-      "poster": "https://images.metahub.space/poster/medium/tt0944947/img"
-    },
-    {
-      "id": "tt11725900",
-      "type": "series",
-      "name": "Karen Pirie",
-      "poster": "https://images.metahub.space/poster/medium/tt11725900/img"
-    },
-    {
       "id": "tt27497393",
       "type": "series",
       "name": "Stuart Fails to Save the Universe",
       "poster": "https://images.metahub.space/poster/medium/tt27497393/img"
+    },
+    {
+      "id": "tt31495377",
+      "type": "series",
+      "name": "Patience",
+      "poster": "https://images.metahub.space/poster/medium/tt31495377/img"
     },
     {
       "id": "tt34577272",
@@ -163,22 +151,34 @@
       "poster": "https://images.metahub.space/poster/medium/tt34577272/img"
     },
     {
-      "id": "tt7366338",
-      "type": "series",
-      "name": "Chernobyl",
-      "poster": "https://images.metahub.space/poster/medium/tt7366338/img"
-    },
-    {
       "id": "tt2802850",
       "type": "series",
       "name": "Fargo",
       "poster": "https://images.metahub.space/poster/medium/tt2802850/img"
     },
     {
+      "id": "tt7366338",
+      "type": "series",
+      "name": "Chernobyl",
+      "poster": "https://images.metahub.space/poster/medium/tt7366338/img"
+    },
+    {
+      "id": "tt0944947",
+      "type": "series",
+      "name": "Game of Thrones",
+      "poster": "https://images.metahub.space/poster/medium/tt0944947/img"
+    },
+    {
       "id": "tt3032476",
       "type": "series",
       "name": "Better Call Saul",
       "poster": "https://images.metahub.space/poster/medium/tt3032476/img"
+    },
+    {
+      "id": "tt11725900",
+      "type": "series",
+      "name": "Karen Pirie",
+      "poster": "https://images.metahub.space/poster/medium/tt11725900/img"
     },
     {
       "id": "tt6473344",
@@ -205,34 +205,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt37439410/img"
     },
     {
-      "id": "tt0185906",
-      "type": "series",
-      "name": "Band of Brothers",
-      "poster": "https://images.metahub.space/poster/medium/tt0185906/img"
-    },
-    {
-      "id": "tt34866681",
-      "type": "series",
-      "name": "Lucky",
-      "poster": "https://images.metahub.space/poster/medium/tt34866681/img"
-    },
-    {
       "id": "tt27543562",
       "type": "series",
       "name": "The Shards",
       "poster": "https://images.metahub.space/poster/medium/tt27543562/img"
     },
     {
-      "id": "tt28088031",
+      "id": "tt5753856",
       "type": "series",
-      "name": "Ransom Canyon",
-      "poster": "https://images.metahub.space/poster/medium/tt28088031/img"
-    },
-    {
-      "id": "tt9892936",
-      "type": "series",
-      "name": "One Hundred Years of Solitude",
-      "poster": "https://images.metahub.space/poster/medium/tt9892936/img"
+      "name": "Dark",
+      "poster": "https://images.metahub.space/poster/medium/tt5753856/img"
     },
     {
       "id": "tt31510819",
@@ -241,40 +223,34 @@
       "poster": "https://images.metahub.space/poster/medium/tt31510819/img"
     },
     {
-      "id": "tt0306414",
+      "id": "tt34866681",
       "type": "series",
-      "name": "The Wire",
-      "poster": "https://images.metahub.space/poster/medium/tt0306414/img"
+      "name": "Lucky",
+      "poster": "https://images.metahub.space/poster/medium/tt34866681/img"
     },
     {
-      "id": "tt0141842",
+      "id": "tt0185906",
       "type": "series",
-      "name": "The Sopranos",
-      "poster": "https://images.metahub.space/poster/medium/tt0141842/img"
+      "name": "Band of Brothers",
+      "poster": "https://images.metahub.space/poster/medium/tt0185906/img"
     },
     {
-      "id": "tt31512174",
+      "id": "tt9892936",
       "type": "series",
-      "name": "Neuromancer",
-      "poster": "https://images.metahub.space/poster/medium/tt31512174/img"
+      "name": "One Hundred Years of Solitude",
+      "poster": "https://images.metahub.space/poster/medium/tt9892936/img"
     },
     {
-      "id": "tt31938062",
+      "id": "tt35768911",
       "type": "series",
-      "name": "The Pitt",
-      "poster": "https://images.metahub.space/poster/medium/tt31938062/img"
+      "name": "Tip Toe",
+      "poster": "https://images.metahub.space/poster/medium/tt35768911/img"
     },
     {
-      "id": "tt35051401",
+      "id": "tt4574334",
       "type": "series",
-      "name": "The East Palace",
-      "poster": "https://images.metahub.space/poster/medium/tt35051401/img"
-    },
-    {
-      "id": "tt43673968",
-      "type": "series",
-      "name": "Mourinho",
-      "poster": "https://images.metahub.space/poster/medium/tt43673968/img"
+      "name": "Stranger Things",
+      "poster": "https://images.metahub.space/poster/medium/tt4574334/img"
     },
     {
       "id": "tt0108778",
@@ -283,22 +259,46 @@
       "poster": "https://images.metahub.space/poster/medium/tt0108778/img"
     },
     {
+      "id": "tt28088031",
+      "type": "series",
+      "name": "Ransom Canyon",
+      "poster": "https://images.metahub.space/poster/medium/tt28088031/img"
+    },
+    {
+      "id": "tt31938062",
+      "type": "series",
+      "name": "The Pitt",
+      "poster": "https://images.metahub.space/poster/medium/tt31938062/img"
+    },
+    {
+      "id": "tt37538664",
+      "type": "series",
+      "name": "Monster: The Lizzie Borden Story",
+      "poster": "https://images.metahub.space/poster/medium/tt37538664/img"
+    },
+    {
+      "id": "tt43673968",
+      "type": "series",
+      "name": "Mourinho",
+      "poster": "https://images.metahub.space/poster/medium/tt43673968/img"
+    },
+    {
+      "id": "tt4236770",
+      "type": "series",
+      "name": "Yellowstone",
+      "poster": "https://images.metahub.space/poster/medium/tt4236770/img"
+    },
+    {
       "id": "tt0758790",
       "type": "series",
       "name": "The Tudors",
       "poster": "https://images.metahub.space/poster/medium/tt0758790/img"
     },
     {
-      "id": "tt19730486",
+      "id": "tt10293938",
       "type": "series",
-      "name": "Tropenjaren",
-      "poster": "https://images.metahub.space/poster/medium/tt19730486/img"
-    },
-    {
-      "id": "tt14452776",
-      "type": "series",
-      "name": "The Bear",
-      "poster": "https://images.metahub.space/poster/medium/tt14452776/img"
+      "name": "Outer Banks",
+      "poster": "https://images.metahub.space/poster/medium/tt10293938/img"
     }
   ]
 }
