@@ -73,10 +73,10 @@
       "poster": "https://images.metahub.space/poster/medium/tt9813792/img"
     },
     {
-      "id": "tt12327578",
+      "id": "tt12329702",
       "type": "series",
       "name": "Star Trek: Strange New Worlds",
-      "poster": "https://images.metahub.space/poster/medium/tt12327578/img"
+      "poster": "https://images.metahub.space/poster/medium/tt12329702/img"
     },
     {
       "id": "tt9686194",
@@ -85,10 +85,22 @@
       "poster": "https://images.metahub.space/poster/medium/tt9686194/img"
     },
     {
+      "id": "tt37439410",
+      "type": "series",
+      "name": "The Perfect Lie",
+      "poster": "https://images.metahub.space/poster/medium/tt37439410/img"
+    },
+    {
       "id": "tt19231492",
       "type": "series",
       "name": "Dark Matter",
       "poster": "https://images.metahub.space/poster/medium/tt19231492/img"
+    },
+    {
+      "id": "tt7587890",
+      "type": "series",
+      "name": "The Rookie",
+      "poster": "https://images.metahub.space/poster/medium/tt7587890/img"
     },
     {
       "id": "tt31938062",
@@ -101,12 +113,6 @@
       "type": "series",
       "name": "Fauda",
       "poster": "https://images.metahub.space/poster/medium/tt4565380/img"
-    },
-    {
-      "id": "tt7587890",
-      "type": "series",
-      "name": "The Rookie",
-      "poster": "https://images.metahub.space/poster/medium/tt7587890/img"
     },
     {
       "id": "tt8201186",
@@ -169,16 +175,10 @@
       "poster": "https://images.metahub.space/poster/medium/tt33049767/img"
     },
     {
-      "id": "tt4236770",
+      "id": "tt2149175",
       "type": "series",
-      "name": "Yellowstone",
-      "poster": "https://images.metahub.space/poster/medium/tt4236770/img"
-    },
-    {
-      "id": "tt6473344",
-      "type": "series",
-      "name": "SEAL Team",
-      "poster": "https://images.metahub.space/poster/medium/tt6473344/img"
+      "name": "The Americans",
+      "poster": "https://images.metahub.space/poster/medium/tt2149175/img"
     },
     {
       "id": "tt43122935",
@@ -193,22 +193,22 @@
       "poster": "https://images.metahub.space/poster/medium/tt10541088/img"
     },
     {
-      "id": "tt22202452",
-      "type": "series",
-      "name": "Pluribus",
-      "poster": "https://images.metahub.space/poster/medium/tt22202452/img"
-    },
-    {
       "id": "tt1883092",
       "type": "series",
       "name": "Generation War",
       "poster": "https://images.metahub.space/poster/medium/tt1883092/img"
     },
     {
-      "id": "tt2149175",
+      "id": "tt22202452",
       "type": "series",
-      "name": "The Americans",
-      "poster": "https://images.metahub.space/poster/medium/tt2149175/img"
+      "name": "Pluribus",
+      "poster": "https://images.metahub.space/poster/medium/tt22202452/img"
+    },
+    {
+      "id": "tt4236770",
+      "type": "series",
+      "name": "Yellowstone",
+      "poster": "https://images.metahub.space/poster/medium/tt4236770/img"
     },
     {
       "id": "tt33253070",
@@ -217,16 +217,10 @@
       "poster": "https://images.metahub.space/poster/medium/tt33253070/img"
     },
     {
-      "id": "tt0898266",
+      "id": "tt1190634",
       "type": "series",
-      "name": "The Big Bang Theory",
-      "poster": "https://images.metahub.space/poster/medium/tt0898266/img"
-    },
-    {
-      "id": "tt0098749",
-      "type": "series",
-      "name": "Beverly Hills, 90210",
-      "poster": "https://images.metahub.space/poster/medium/tt0098749/img"
+      "name": "The Boys",
+      "poster": "https://images.metahub.space/poster/medium/tt1190634/img"
     },
     {
       "id": "tt34385331",
@@ -241,10 +235,22 @@
       "poster": "https://images.metahub.space/poster/medium/tt10293938/img"
     },
     {
-      "id": "tt1190634",
+      "id": "tt0098749",
       "type": "series",
-      "name": "The Boys",
-      "poster": "https://images.metahub.space/poster/medium/tt1190634/img"
+      "name": "Beverly Hills, 90210",
+      "poster": "https://images.metahub.space/poster/medium/tt0098749/img"
+    },
+    {
+      "id": "tt4574334",
+      "type": "series",
+      "name": "Stranger Things",
+      "poster": "https://images.metahub.space/poster/medium/tt4574334/img"
+    },
+    {
+      "id": "tt4158110",
+      "type": "series",
+      "name": "Mr. Robot",
+      "poster": "https://images.metahub.space/poster/medium/tt4158110/img"
     },
     {
       "id": "tt30051064",
@@ -265,22 +271,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt18228732/img"
     },
     {
-      "id": "tt0185906",
+      "id": "tt0898266",
       "type": "series",
-      "name": "Band of Brothers",
-      "poster": "https://images.metahub.space/poster/medium/tt0185906/img"
+      "name": "The Big Bang Theory",
+      "poster": "https://images.metahub.space/poster/medium/tt0898266/img"
     },
     {
       "id": "tt11846996",
       "type": "series",
       "name": "Vigil",
       "poster": "https://images.metahub.space/poster/medium/tt11846996/img"
-    },
-    {
-      "id": "tt2356777",
-      "type": "series",
-      "name": "True Detective",
-      "poster": "https://images.metahub.space/poster/medium/tt2356777/img"
     },
     {
       "id": "tt38218082",
