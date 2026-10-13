@@ -151,16 +151,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt6037988/img"
     },
     {
-      "id": "tt31449991",
-      "type": "series",
-      "name": "Chad Powers",
-      "poster": "https://images.metahub.space/poster/medium/tt31449991/img"
-    },
-    {
       "id": "tt3718778",
       "type": "series",
       "name": "Over the Garden Wall",
       "poster": "https://images.metahub.space/poster/medium/tt3718778/img"
+    },
+    {
+      "id": "tt31449991",
+      "type": "series",
+      "name": "Chad Powers",
+      "poster": "https://images.metahub.space/poster/medium/tt31449991/img"
     },
     {
       "id": "tt15557874",
@@ -169,10 +169,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt15557874/img"
     },
     {
-      "id": "tt12327578",
+      "id": "tt12329702",
       "type": "series",
       "name": "Star Trek: Strange New Worlds",
-      "poster": "https://images.metahub.space/poster/medium/tt12327578/img"
+      "poster": "https://images.metahub.space/poster/medium/tt12329702/img"
+    },
+    {
+      "id": "tt2149175",
+      "type": "series",
+      "name": "The Americans",
+      "poster": "https://images.metahub.space/poster/medium/tt2149175/img"
     },
     {
       "id": "tt18228732",
@@ -185,12 +191,6 @@
       "type": "series",
       "name": "Stuart Fails to Save the Universe",
       "poster": "https://images.metahub.space/poster/medium/tt27497393/img"
-    },
-    {
-      "id": "tt2149175",
-      "type": "series",
-      "name": "The Americans",
-      "poster": "https://images.metahub.space/poster/medium/tt2149175/img"
     },
     {
       "id": "tt31938062",
@@ -223,16 +223,16 @@
       "poster": "https://images.metahub.space/poster/medium/tt0203259/img"
     },
     {
+      "id": "tt4370492",
+      "type": "series",
+      "name": "The X-Files",
+      "poster": "https://images.metahub.space/poster/medium/tt4370492/img"
+    },
+    {
       "id": "tt37063558",
       "type": "series",
       "name": "R.J. Decker",
       "poster": "https://images.metahub.space/poster/medium/tt37063558/img"
-    },
-    {
-      "id": "tt0106179",
-      "type": "series",
-      "name": "The X-Files",
-      "poster": "https://images.metahub.space/poster/medium/tt0106179/img"
     },
     {
       "id": "tt9813792",
@@ -265,28 +265,28 @@
       "poster": "https://images.metahub.space/poster/medium/tt0098936/img"
     },
     {
+      "id": "tt0098844",
+      "type": "series",
+      "name": "Law & Order",
+      "poster": "https://images.metahub.space/poster/medium/tt0098844/img"
+    },
+    {
       "id": "tt23734948",
       "type": "series",
       "name": "The Pendragon Cycle: Rise of the Merlin",
       "poster": "https://images.metahub.space/poster/medium/tt23734948/img"
     },
     {
-      "id": "tt2297757",
+      "id": "tt0239195",
       "type": "series",
-      "name": "Nathan for You",
-      "poster": "https://images.metahub.space/poster/medium/tt2297757/img"
+      "name": "Survivor",
+      "poster": "https://images.metahub.space/poster/medium/tt0239195/img"
     },
     {
       "id": "tt14452776",
       "type": "series",
       "name": "The Bear",
       "poster": "https://images.metahub.space/poster/medium/tt14452776/img"
-    },
-    {
-      "id": "tt0098844",
-      "type": "series",
-      "name": "Law & Order",
-      "poster": "https://images.metahub.space/poster/medium/tt0098844/img"
     },
     {
       "id": "tt0758745",
